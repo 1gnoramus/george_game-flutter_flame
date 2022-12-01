@@ -1,11 +1,14 @@
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame_audio/flame_audio.dart';
+import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/material.dart';
 import 'button_controller.dart';
+import 'package:flame/input.dart';
+import 'package:flame_forge2d/flame_forge2d.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,15 +31,16 @@ void main() {
   );
 }
 
-class MyGeorgeGame extends FlameGame with TapDetector {
+class MyGeorgeGame extends FlameGame with TapDetector, CollisionCallbacks {
   late SpriteAnimation downAnimation;
   late SpriteAnimation upAnimation;
   late SpriteAnimation rightAnimation;
   late SpriteAnimation leftAnimation;
   late SpriteAnimation idleAnimation;
 
-  late SpriteAnimationComponent george;
-  late SpriteComponent background;
+  late GeorgeComponent george;
+  late double mapWidth;
+  late double mapHeight;
 
   int directions = 0;
   final double animationSpeed = .1;
@@ -47,11 +51,12 @@ class MyGeorgeGame extends FlameGame with TapDetector {
   Future<void> onLoad() async {
     await super.onLoad();
 
-    Sprite backgroundSprite = await loadSprite('bg.png');
-    background = SpriteComponent()
-      ..sprite = backgroundSprite
-      ..size = backgroundSprite.originalSize;
-    add(background);
+    final homeMap = await TiledComponent.load('map.tmx', Vector2.all(16));
+    add(homeMap);
+
+    mapWidth = homeMap.tileMap.map.width * 16.0;
+    mapHeight = homeMap.tileMap.map.height * 16.0;
+
     FlameAudio.bgm.initialize();
     FlameAudio.audioCache.load('cute.mp3');
 
@@ -71,14 +76,15 @@ class MyGeorgeGame extends FlameGame with TapDetector {
     idleAnimation =
         spriteSheet.createAnimation(row: 0, stepTime: animationSpeed, to: 1);
 
-    george = SpriteAnimationComponent()
+    george = GeorgeComponent()
       ..animation = idleAnimation
       ..position = Vector2(100, 200)
+      ..debugMode = true
       ..size = Vector2.all(characterSize);
     add(george);
 
     camera.followComponent(george,
-        worldBounds: Rect.fromLTRB(0, 0, background.size.x, background.size.y));
+        worldBounds: Rect.fromLTRB(0, 0, mapWidth, mapHeight));
   }
 
   @override
@@ -94,7 +100,7 @@ class MyGeorgeGame extends FlameGame with TapDetector {
         george.animation = idleAnimation;
         break;
       case 1:
-        if (george.y < background.size.y - george.height) {
+        if (george.y < mapWidth - george.height) {
           george.animation = downAnimation;
           george.y += dt * characterSpeed;
         }
@@ -113,7 +119,7 @@ class MyGeorgeGame extends FlameGame with TapDetector {
 
         break;
       case 4:
-        if (george.x < background.size.x - george.width) {
+        if (george.x < mapHeight - george.width) {
           george.animation = rightAnimation;
           george.x += dt * characterSpeed;
         }
@@ -127,5 +133,25 @@ class MyGeorgeGame extends FlameGame with TapDetector {
     if (directions > 4) {
       directions = 0;
     }
+  }
+}
+
+class FriendComponent extends PositionComponent
+    with GestureHitboxes, CollisionCallbacks {
+  FriendComponent() {
+    add(RectangleHitbox());
+  }
+
+  @override
+  void onCollisionEnd(PositionComponent other) {
+    print('I made a new friend');
+    super.onCollisionEnd(other);
+  }
+}
+
+class GeorgeComponent extends SpriteAnimationComponent
+    with GestureHitboxes, CollisionCallbacks {
+  GeorgeComponent() {
+    add(RectangleHitbox());
   }
 }
