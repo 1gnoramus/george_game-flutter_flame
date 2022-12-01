@@ -57,6 +57,17 @@ class MyGeorgeGame extends FlameGame with TapDetector, CollisionCallbacks {
     mapWidth = homeMap.tileMap.map.width * 16.0;
     mapHeight = homeMap.tileMap.map.height * 16.0;
 
+    final friendGroup = homeMap.tileMap.getLayer<ObjectGroup>('Friends');
+
+    for (var friendBox in friendGroup!.objects) {
+      add(
+        FriendComponent()
+          ..position = Vector2(friendBox.x, friendBox.y)
+          ..width = friendBox.width
+          ..height = friendBox.height
+          ..debugMode = true,
+      );
+    }
     FlameAudio.bgm.initialize();
     FlameAudio.audioCache.load('cute.mp3');
 
@@ -144,7 +155,9 @@ class FriendComponent extends PositionComponent
 
   @override
   void onCollisionEnd(PositionComponent other) {
-    print('I made a new friend');
+    if (other is ScreenHitbox) {
+      print('I made a new friend');
+    }
     super.onCollisionEnd(other);
   }
 }
