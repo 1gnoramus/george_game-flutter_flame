@@ -6,6 +6,7 @@ import 'package:flame_audio/flame_audio.dart';
 class ButtonController extends StatelessWidget {
   const ButtonController({Key? key, required this.game});
   final MyGeorgeGame game;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,6 +41,11 @@ class ButtonController extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Row(
             children: [
+              Image.asset(
+                'assets/images/friend.png',
+                scale: .7,
+              ),
+              const SizedBox(width: 12.0),
               Text(
                 '${game.friendNumber}',
                 style: TextStyle(fontSize: 28.0, color: Colors.black45),

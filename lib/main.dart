@@ -7,8 +7,10 @@ import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/material.dart';
 import 'button_controller.dart';
+import 'package:flame/geometry.dart';
 import 'package:flame/input.dart';
-import 'package:flame_forge2d/flame_forge2d.dart';
+import 'characters/friend_component.dart';
+import 'characters/george_component.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,19 +33,12 @@ void main() {
   );
 }
 
-class MyGeorgeGame extends FlameGame with TapDetector, CollisionCallbacks {
-  late SpriteAnimation downAnimation;
-  late SpriteAnimation upAnimation;
-  late SpriteAnimation rightAnimation;
-  late SpriteAnimation leftAnimation;
-  late SpriteAnimation idleAnimation;
-
+class MyGeorgeGame extends FlameGame with TapDetector, HasCollisionDetection {
   late GeorgeComponent george;
   late double mapWidth;
   late double mapHeight;
 
   int directions = 0;
-  final double animationSpeed = .1;
   String soundTrackName = 'Cute Music';
   final double characterSize = 100.0;
   final double characterSpeed = 100;
@@ -62,7 +57,7 @@ class MyGeorgeGame extends FlameGame with TapDetector, CollisionCallbacks {
 
     for (var friendBox in friendGroup!.objects) {
       add(
-        FriendComponent()
+        FriendComponent(game: this)
           ..position = Vector2(friendBox.x, friendBox.y)
           ..width = friendBox.width
           ..height = friendBox.height
@@ -71,25 +66,10 @@ class MyGeorgeGame extends FlameGame with TapDetector, CollisionCallbacks {
     }
     FlameAudio.bgm.initialize();
     FlameAudio.audioCache.load('cute.mp3');
-
+    FlameAudio.bgm.play('cute.mp3');
     overlays.add('ButtonController');
 
-    final spriteSheet = SpriteSheet(
-        image: await images.load('george.png'), srcSize: Vector2(48, 48));
-
-    downAnimation =
-        spriteSheet.createAnimation(row: 0, stepTime: animationSpeed, to: 4);
-    leftAnimation =
-        spriteSheet.createAnimation(row: 1, stepTime: animationSpeed, to: 4);
-    upAnimation =
-        spriteSheet.createAnimation(row: 2, stepTime: animationSpeed, to: 4);
-    rightAnimation =
-        spriteSheet.createAnimation(row: 3, stepTime: animationSpeed, to: 4);
-    idleAnimation =
-        spriteSheet.createAnimation(row: 0, stepTime: animationSpeed, to: 1);
-
-    george = GeorgeComponent()
-      ..animation = idleAnimation
+    george = GeorgeComponent(game: this)
       ..position = Vector2(100, 200)
       ..debugMode = true
       ..size = Vector2.all(characterSize);
@@ -105,67 +85,10 @@ class MyGeorgeGame extends FlameGame with TapDetector, CollisionCallbacks {
   }
 
   @override
-  void update(double dt) {
-    super.update(dt);
-    switch (directions) {
-      case 0:
-        george.animation = idleAnimation;
-        break;
-      case 1:
-        if (george.y < mapWidth - george.height) {
-          george.animation = downAnimation;
-          george.y += dt * characterSpeed;
-        }
-        break;
-      case 2:
-        if (george.x > 0) {
-          george.animation = leftAnimation;
-          george.x -= dt * characterSpeed;
-        }
-        break;
-      case 3:
-        if (george.y > 0) {
-          george.animation = upAnimation;
-          george.y -= dt * characterSpeed;
-        }
-
-        break;
-      case 4:
-        if (george.x < mapHeight - george.width) {
-          george.animation = rightAnimation;
-          george.x += dt * characterSpeed;
-        }
-        break;
-    }
-  }
-
-  @override
   void onTapUp(TapUpInfo info) {
     directions += 1;
     if (directions > 4) {
       directions = 0;
     }
-  }
-}
-
-class FriendComponent extends PositionComponent
-    with GestureHitboxes, CollisionCallbacks {
-  FriendComponent() {
-    add(RectangleHitbox());
-  }
-
-  @override
-  void onCollisionEnd(PositionComponent other) {
-    if (!isColliding) {
-      print('object');
-    }
-    super.onCollisionEnd(other);
-  }
-}
-
-class GeorgeComponent extends SpriteAnimationComponent
-    with GestureHitboxes, CollisionCallbacks {
-  GeorgeComponent() {
-    add(RectangleHitbox());
   }
 }
