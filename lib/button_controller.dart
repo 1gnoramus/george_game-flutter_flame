@@ -8,28 +8,44 @@ class ButtonController extends StatelessWidget {
   final MyGeorgeGame game;
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const SizedBox(
-          height: 80.0,
+        Row(
+          children: [
+            const SizedBox(
+              height: 80.0,
+            ),
+            IconButton(
+              icon: const Icon(Icons.volume_up_rounded),
+              color: Colors.pink.shade200,
+              onPressed: () {
+                FlameAudio.bgm.play('cute.mp3');
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.volume_off_rounded),
+              color: Colors.pink.shade200,
+              onPressed: () {
+                FlameAudio.bgm.stop();
+              },
+            ),
+            Text(
+              game.soundTrackName,
+              style: TextStyle(color: Colors.pink.shade200, fontSize: 20),
+            )
+          ],
         ),
-        IconButton(
-          icon: const Icon(Icons.volume_up_rounded),
-          color: Colors.pink.shade200,
-          onPressed: () {
-            FlameAudio.bgm.play('cute.mp3');
-          },
-        ),
-        IconButton(
-          icon: const Icon(Icons.volume_off_rounded),
-          color: Colors.pink.shade200,
-          onPressed: () {
-            FlameAudio.bgm.stop();
-          },
-        ),
-        Text(
-          game.soundTrackName,
-          style: TextStyle(color: Colors.pink.shade200, fontSize: 20),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Row(
+            children: [
+              Text(
+                '${game.friendNumber}',
+                style: TextStyle(fontSize: 28.0, color: Colors.black45),
+              )
+            ],
+          ),
         )
       ],
     );

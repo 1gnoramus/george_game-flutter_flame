@@ -44,9 +44,10 @@ class MyGeorgeGame extends FlameGame with TapDetector, CollisionCallbacks {
 
   int directions = 0;
   final double animationSpeed = .1;
-  final String soundTrackName = 'Cute Music';
+  String soundTrackName = 'Cute Music';
   final double characterSize = 100.0;
   final double characterSpeed = 100;
+  int friendNumber = 0;
 
   Future<void> onLoad() async {
     await super.onLoad();
@@ -155,8 +156,8 @@ class FriendComponent extends PositionComponent
 
   @override
   void onCollisionEnd(PositionComponent other) {
-    if (other is ScreenHitbox) {
-      print('I made a new friend');
+    if (!isColliding) {
+      print('object');
     }
     super.onCollisionEnd(other);
   }
