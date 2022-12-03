@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="88" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="3">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="88" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="12">
  <tileset firstgid="1" name="bg" tilewidth="16" tileheight="16" tilecount="4400" columns="88">
   <image source="../images/bg.png" width="1408" height="800"/>
+ </tileset>
+ <tileset firstgid="4401" name="egg" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../images/egg.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="4402" name="taco" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../images/taco.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="4403" name="bread" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../images/bread.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="4404" name="fries" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../images/fries.png" width="32" height="32"/>
  </tileset>
  <layer id="1" name="static_map" width="88" height="50">
   <data encoding="base64">
@@ -11,5 +23,15 @@
  <objectgroup id="2" name="Friends">
   <object id="1" x="111" y="429.667" width="32" height="43.3333"/>
   <object id="2" x="286" y="62" width="34" height="46"/>
+ </objectgroup>
+ <objectgroup id="3" name="BakedGoods">
+  <object id="3" class="Egg" x="1136.67" y="161.333" width="32" height="32"/>
+  <object id="4" class="Fries" x="710" y="290.667" width="32" height="32"/>
+  <object id="5" class="Taco" x="334" y="525.333" width="32" height="32"/>
+  <object id="6" class="Bread" x="342" y="152" width="32" height="32"/>
+  <object id="8" gid="4401" x="1137.33" y="192" width="32" height="32"/>
+  <object id="9" gid="4403" x="709.333" y="324" width="32" height="32"/>
+  <object id="10" gid="4404" x="337.333" y="557.333" width="32" height="32"/>
+  <object id="11" gid="4402" x="344" y="184" width="32" height="32"/>
  </objectgroup>
 </map>
