@@ -8,7 +8,7 @@ import '../main.dart';
 class GeorgeComponent extends SpriteAnimationComponent
     with GestureHitboxes, CollisionCallbacks, HasGameRef {
   GeorgeComponent({required this.game}) {
-    add(RectangleHitbox());
+    add(RectangleHitbox(size: Vector2.all(0.75)));
   }
   final MyGeorgeGame game;
   late SpriteAnimation downAnimation;

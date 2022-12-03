@@ -9,8 +9,10 @@ import 'package:flutter/material.dart';
 import 'button_controller.dart';
 import 'package:flame/geometry.dart';
 import 'package:flame/input.dart';
+import 'characters/baked_good_component.dart';
 import 'characters/friend_component.dart';
 import 'characters/george_component.dart';
+import 'loaders/add_baked_good.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +45,7 @@ class MyGeorgeGame extends FlameGame with TapDetector, HasCollisionDetection {
   final double characterSize = 100.0;
   final double characterSpeed = 100;
   int friendNumber = 0;
+  int bakedGoodsInventory = 0;
 
   Future<void> onLoad() async {
     await super.onLoad();
@@ -52,6 +55,8 @@ class MyGeorgeGame extends FlameGame with TapDetector, HasCollisionDetection {
 
     mapWidth = homeMap.tileMap.map.width * 16.0;
     mapHeight = homeMap.tileMap.map.height * 16.0;
+
+    addBakedGoods(homeMap, this);
 
     final friendGroup = homeMap.tileMap.getLayer<ObjectGroup>('Friends');
 
