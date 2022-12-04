@@ -35,7 +35,8 @@ void main() {
   );
 }
 
-class MyGeorgeGame extends FlameGame with TapDetector, HasCollisionDetection {
+class MyGeorgeGame extends FlameGame
+    with TapDetector, HasCollisionDetection, Notifier {
   late GeorgeComponent george;
   late double mapWidth;
   late double mapHeight;
@@ -71,7 +72,7 @@ class MyGeorgeGame extends FlameGame with TapDetector, HasCollisionDetection {
     }
     FlameAudio.bgm.initialize();
     FlameAudio.audioCache.load('cute.mp3');
-    FlameAudio.bgm.play('cute.mp3');
+    // FlameAudio.bgm.play('cute.mp3');
     overlays.add('ButtonController');
 
     george = GeorgeComponent(game: this)

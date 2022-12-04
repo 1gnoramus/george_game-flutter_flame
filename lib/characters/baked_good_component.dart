@@ -1,6 +1,5 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/geometry.dart';
 
 import '../main.dart';
 
@@ -11,13 +10,15 @@ class BakedGoodComponent extends SpriteComponent
         Notifier,
         HasGameRef<MyGeorgeGame> {
   BakedGoodComponent() {
-    add(RectangleHitbox(size: Vector2.all(2)));
+    add(RectangleHitbox());
     debugMode = true;
   }
 
   @override
   void onCollision(Set<Vector2> points, PositionComponent other) {
     gameRef.bakedGoodsInventory++;
+    gameRef.overlays;
+    gameRef.notifyListeners;
     print('${gameRef.bakedGoodsInventory}');
     this.removeFromParent();
   }
