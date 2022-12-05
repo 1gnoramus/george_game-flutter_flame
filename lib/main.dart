@@ -62,7 +62,8 @@ class MyGeorgeGame extends FlameGame
     mapHeight = homeMap.tileMap.map.height * 16.0;
 
     addBakedGoods(homeMap, this);
-    yummy = await AudioPool.create('yummy.mp3', maxPlayers: 1);
+    yummy = await AudioPool.create('audio/sfx/yummy.mp3', maxPlayers: 1);
+    cheer = await AudioPool.create('audio/sfx/cheer_2.mp3', maxPlayers: 1);
 
     final friendGroup = homeMap.tileMap.getLayer<ObjectGroup>('Friends');
 

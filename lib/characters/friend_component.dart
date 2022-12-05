@@ -17,6 +17,7 @@ class FriendComponent extends PositionComponent
   void onCollision(Set<Vector2> points, PositionComponent other) {
     game.friendNumber++;
     game.notifyListeners();
+    game.cheer.start();
     print('${game.friendNumber}');
     this.removeFromParent();
     super.onCollision(points, other);
