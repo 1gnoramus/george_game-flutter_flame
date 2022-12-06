@@ -7,6 +7,7 @@ import 'package:flame_audio/audio_pool.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/material.dart';
+import 'package:george_game_flame/dialog/dialog_box.dart';
 import 'button_controller.dart';
 import 'package:flame/geometry.dart';
 import 'package:flame/input.dart';
@@ -51,6 +52,7 @@ class MyGeorgeGame extends FlameGame
 
   late AudioPool yummy;
   late AudioPool cheer;
+  late DialogBox dialogBox;
 
   Future<void> onLoad() async {
     await super.onLoad();
@@ -64,6 +66,13 @@ class MyGeorgeGame extends FlameGame
     addBakedGoods(homeMap, this);
     yummy = await AudioPool.create('audio/sfx/yummy.mp3', maxPlayers: 1);
     cheer = await AudioPool.create('audio/sfx/cheer_2.mp3', maxPlayers: 1);
+
+    dialogBox = DialogBox(
+        text: 'Hi. I am George. I have just'
+            ' moved to Happy Big Village'
+            ' I. Want. To. Make. Some. Frriiiiienndds)0',
+        game: this);
+    add(dialogBox);
 
     final friendGroup = homeMap.tileMap.getLayer<ObjectGroup>('Friends');
 
