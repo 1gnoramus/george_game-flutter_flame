@@ -8,7 +8,7 @@
  </tileset>
  <tileset firstgid="4402" name="taco" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="../images/taco.png" width="32" height="32"/>
- </tileset>
+ </tileset> 
  <tileset firstgid="4403" name="bread" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="../images/bread.png" width="32" height="32"/>
  </tileset>

@@ -57,13 +57,13 @@ class MyGeorgeGame extends FlameGame
   Future<void> onLoad() async {
     await super.onLoad();
 
-    final homeMap = await TiledComponent.load('map.tmx', Vector2.all(16));
+    final homeMap = await TiledComponent.load('happy_map.tmx', Vector2.all(16));
     add(homeMap);
 
     mapWidth = homeMap.tileMap.map.width * 16.0;
     mapHeight = homeMap.tileMap.map.height * 16.0;
 
-    addBakedGoods(homeMap, this);
+    // addBakedGoods(homeMap, this);
     yummy = await AudioPool.create('audio/sfx/yummy.mp3', maxPlayers: 1);
     cheer = await AudioPool.create('audio/sfx/cheer_2.mp3', maxPlayers: 1);
 
@@ -74,17 +74,17 @@ class MyGeorgeGame extends FlameGame
         game: this);
     add(dialogBox);
 
-    final friendGroup = homeMap.tileMap.getLayer<ObjectGroup>('Friends');
+    // final friendGroup = homeMap.tileMap.getLayer<ObjectGroup>('Friends');
 
-    for (var friendBox in friendGroup!.objects) {
-      add(
-        FriendComponent(game: this)
-          ..position = Vector2(friendBox.x, friendBox.y)
-          ..width = friendBox.width
-          ..height = friendBox.height
-          ..debugMode = true,
-      );
-    }
+    // for (var friendBox in friendGroup!.objects) {
+    //   add(
+    //     FriendComponent(game: this)
+    //       ..position = Vector2(friendBox.x, friendBox.y)
+    //       ..width = friendBox.width
+    //       ..height = friendBox.height
+    //       ..debugMode = true,
+    //   );
+    // }
     FlameAudio.bgm.initialize();
     FlameAudio.audioCache.load('cute.mp3');
     // FlameAudio.bgm.play('cute.mp3');
