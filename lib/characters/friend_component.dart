@@ -27,7 +27,6 @@ class FriendComponent extends PositionComponent
     } else {
       message = 'Fuck off. Where is my fucking pie< bitch?';
     }
-
     game.dialogBox = DialogBox(text: message, game: game);
     game.add(game.dialogBox);
 
