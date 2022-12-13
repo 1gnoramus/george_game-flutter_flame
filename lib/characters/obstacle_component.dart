@@ -13,5 +13,6 @@ class ObstacleComponent extends PositionComponent
   @override
   void onCollision(Set<Vector2> points, PositionComponent other) {
     print('obstacle got hit');
+    super.onCollision(points, other);
   }
 }

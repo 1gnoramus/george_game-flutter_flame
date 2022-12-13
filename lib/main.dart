@@ -9,6 +9,7 @@ import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/material.dart';
 import 'package:george_game_flame/dialog/dialog_box.dart';
 import 'package:george_game_flame/loaders/load_friends.dart';
+import 'package:george_game_flame/loaders/load_obstacles.dart';
 import 'button_controller.dart';
 import 'package:flame/geometry.dart';
 import 'package:flame/input.dart';
@@ -46,8 +47,8 @@ class MyGeorgeGame extends FlameGame
 
   int directions = 0;
   String soundTrackName = 'Cute Music';
-  final double characterSize = 45.0;
-  final double characterSpeed = 100;
+  final double characterSize = 300;
+  final double characterSpeed = 300;
   int friendNumber = 0;
   int bakedGoodsInventory = 0;
 
@@ -66,6 +67,7 @@ class MyGeorgeGame extends FlameGame
 
     addBakedGoods(homeMap, this);
     loadFriends(homeMap, this);
+    loadObstacles(homeMap, this);
 
     yummy = await AudioPool.create('audio/sfx/yummy.mp3', maxPlayers: 1);
     cheer = await AudioPool.create('audio/sfx/cheer_2.mp3', maxPlayers: 1);
@@ -83,7 +85,7 @@ class MyGeorgeGame extends FlameGame
     overlays.add('ButtonController');
 
     george = GeorgeComponent(game: this)
-      ..position = Vector2(100, 200)
+      ..position = Vector2(50, 50)
       ..debugMode = true
       ..size = Vector2.all(characterSize);
     add(george);
