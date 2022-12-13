@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="88" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="12">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="88" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="18">
  <tileset firstgid="1" name="Alex_idle_16x16" tilewidth="16" tileheight="16" tilecount="8" columns="4">
   <image source="../images/Alex_idle_16x16.png" width="64" height="32"/>
  </tileset>
  <tileset firstgid="9" name="bg2" tilewidth="16" tileheight="16" tilecount="855" columns="19">
   <image source="../images/bg2.png" width="304" height="720"/>
+ </tileset>
+ <tileset firstgid="864" name="taco" tilewidth="16" tileheight="16" tilecount="4" columns="2">
+  <image source="../images/taco.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="868" name="egg" tilewidth="16" tileheight="16" tilecount="4" columns="2">
+  <image source="../images/egg.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="872" name="fries" tilewidth="16" tileheight="16" tilecount="4" columns="2">
+  <image source="../images/fries.png" width="32" height="32"/>
  </tileset>
  <layer id="1" name="ground" width="88" height="50">
   <data encoding="base64">
@@ -22,14 +31,22 @@
   </data>
  </layer>
  <objectgroup id="5" name="Friends">
-  <object id="1" x="48.6667" y="232.667" width="16" height="22.6667"/>
-  <object id="2" x="174.667" y="232" width="18.6667" height="25.3333"/>
-  <object id="3" x="318.667" y="231.333" width="18.6667" height="26"/>
+  <object id="1" x="41.3334" y="225.334" width="27.3333" height="36"/>
+  <object id="2" x="170.667" y="228" width="28" height="34.6666"/>
+  <object id="3" x="314.667" y="228.666" width="26" height="32"/>
  </objectgroup>
  <objectgroup id="6" name="BakedGoods">
   <object id="4" class="Fries" x="42.6667" y="295.333" width="32" height="32"/>
   <object id="5" class="Taco" x="174.667" y="304.667" width="32" height="32"/>
   <object id="10" class="Egg" x="317.333" y="304.667" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup id="7" name="Obstacles">
+  <object id="12" x="48" y="233.667" width="15.6667" height="22.3333"/>
+  <object id="13" x="175.667" y="232.667" width="16" height="23.3333"/>
+  <object id="14" x="319" y="233" width="17.3333" height="23.6667"/>
+  <object id="15" x="151.333" y="196.333" width="64.3333" height="48.6667"/>
+  <object id="16" x="293.333" y="190.667" width="68.6667" height="54.3333"/>
+  <object id="17" x="23" y="196.333" width="66.3333" height="50"/>
  </objectgroup>
  <layer id="4" name="friend_overlays" width="88" height="50">
   <data encoding="base64">

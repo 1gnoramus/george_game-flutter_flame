@@ -8,6 +8,7 @@ import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/material.dart';
 import 'package:george_game_flame/dialog/dialog_box.dart';
+import 'package:george_game_flame/loaders/load_friends.dart';
 import 'button_controller.dart';
 import 'package:flame/geometry.dart';
 import 'package:flame/input.dart';
@@ -64,6 +65,8 @@ class MyGeorgeGame extends FlameGame
     mapHeight = homeMap.tileMap.map.height * 16.0;
 
     addBakedGoods(homeMap, this);
+    loadFriends(homeMap, this);
+
     yummy = await AudioPool.create('audio/sfx/yummy.mp3', maxPlayers: 1);
     cheer = await AudioPool.create('audio/sfx/cheer_2.mp3', maxPlayers: 1);
 
@@ -74,17 +77,6 @@ class MyGeorgeGame extends FlameGame
         game: this);
     add(dialogBox);
 
-    final friendGroup = homeMap.tileMap.getLayer<ObjectGroup>('Friends');
-
-    for (var friendBox in friendGroup!.objects) {
-      add(
-        FriendComponent(game: this)
-          ..position = Vector2(friendBox.x, friendBox.y)
-          ..width = friendBox.width
-          ..height = friendBox.height
-          ..debugMode = true,
-      );
-    }
     FlameAudio.bgm.initialize();
     FlameAudio.audioCache.load('cute.mp3');
     // FlameAudio.bgm.play('cute.mp3');
