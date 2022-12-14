@@ -46,6 +46,7 @@ class MyGeorgeGame extends FlameGame
   late double mapHeight;
 
   int directions = 0;
+  int collisionDirection = -1;
   String soundTrackName = 'Cute Music';
   final double characterSize = 300;
   final double characterSpeed = 300;
