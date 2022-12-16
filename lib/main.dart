@@ -48,8 +48,8 @@ class MyGeorgeGame extends FlameGame
   int directions = 0;
   int collisionDirection = -1;
   String soundTrackName = 'Cute Music';
-  final double characterSize = 300;
-  final double characterSpeed = 300;
+  final double characterSize = 70;
+  final double characterSpeed = 150;
   int friendNumber = 0;
   int bakedGoodsInventory = 0;
 
@@ -60,7 +60,9 @@ class MyGeorgeGame extends FlameGame
   Future<void> onLoad() async {
     await super.onLoad();
 
-    final homeMap = await TiledComponent.load('happy_map.tmx', Vector2.all(16));
+    // final homeMap = await TiledComponent.load('happy_map.tmx', Vector2.all(16));
+    final homeMap = await TiledComponent.load('map.tmx', Vector2.all(16));
+
     add(homeMap);
 
     mapWidth = homeMap.tileMap.map.width * 16.0;
