@@ -6,7 +6,7 @@ import '../my_george_game.dart';
 class GeorgeComponent extends SpriteAnimationComponent
     with GestureHitboxes, CollisionCallbacks, HasGameRef {
   GeorgeComponent({required this.game}) {
-    add(RectangleHitbox());
+    add(RectangleHitbox(size: Vector2.all(50)));
   }
   final MyGeorgeGame game;
   late SpriteAnimation downAnimation;
@@ -36,46 +36,48 @@ class GeorgeComponent extends SpriteAnimationComponent
 
   @override
   void update(double dt) {
-    super.update(dt);
-    switch (game.directions) {
-      case 0:
-        animation = idleAnimation;
-        break;
-      case 1:
-        animation = downAnimation;
-        if (y < game.mapWidth - height) {
-          if (game.collisionDirection != 1) {
-            y += dt * game.characterSpeed;
+    if (!game.showDialog) {
+      switch (game.directions) {
+        case 0:
+          animation = idleAnimation;
+          break;
+        case 1:
+          animation = downAnimation;
+          if (y < game.mapWidth - height) {
+            if (game.collisionDirection != 1) {
+              y += dt * game.characterSpeed;
+            }
           }
-        }
-        break;
-      case 2:
-        animation = leftAnimation;
-        if (x > 0) {
-          if (game.collisionDirection != 2) {
-            x -= dt * game.characterSpeed;
+          break;
+        case 2:
+          animation = leftAnimation;
+          if (x > 0) {
+            if (game.collisionDirection != 2) {
+              x -= dt * game.characterSpeed;
+            }
           }
-        }
-        break;
-      case 3:
-        animation = upAnimation;
+          break;
+        case 3:
+          animation = upAnimation;
 
-        if (y > 0) {
-          if (game.collisionDirection != 3) {
-            y -= dt * game.characterSpeed;
+          if (y > 0) {
+            if (game.collisionDirection != 3) {
+              y -= dt * game.characterSpeed;
+            }
           }
-        }
 
-        break;
-      case 4:
-        animation = rightAnimation;
+          break;
+        case 4:
+          animation = rightAnimation;
 
-        if (x < game.mapHeight - width) {
-          if (game.collisionDirection != 4) {
-            x += dt * game.characterSpeed;
+          if (x < game.mapHeight - width) {
+            if (game.collisionDirection != 4) {
+              x += dt * game.characterSpeed;
+            }
           }
-        }
-        break;
+          break;
+      }
     }
+    super.update(dt);
   }
 }

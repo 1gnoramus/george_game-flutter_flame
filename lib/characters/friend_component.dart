@@ -18,17 +18,17 @@ class FriendComponent extends PositionComponent
     var message = '';
     if (other is GeorgeComponent) {
       if (game.bakedGoodsInventory > 0) {
-        message = 'Wow. I am amazed' ' Marry my daughter ' 'or something';
+        game.dialogMessage =
+            'Wow. I am amazed' ' Marry my daughter ' 'or something';
         game.friendNumber++;
         game.cheer.start();
 
         game.bakedGoodsInventory--;
         this.removeFromParent();
       } else {
-        message = 'Fuck off. Where is my fucking pie< bitch?';
+        game.dialogMessage = 'Fuck off. Where is my fucking pie< bitch?';
       }
-      game.dialogBox = DialogBox(text: message, game: game);
-      game.add(game.dialogBox);
+      game.showDialog = true;
     }
 
     super.onCollision(points, other);

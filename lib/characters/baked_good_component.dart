@@ -1,5 +1,6 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:george_game_flame/characters/george_component.dart';
 
 import '../main.dart';
 import '../my_george_game.dart';
@@ -17,11 +18,12 @@ class BakedGoodComponent extends SpriteComponent
 
   @override
   void onCollision(Set<Vector2> points, PositionComponent other) {
-    gameRef.bakedGoodsInventory++;
-    gameRef.yummy.start();
-    gameRef.overlays;
-    gameRef.notifyListeners;
-    print('${gameRef.bakedGoodsInventory}');
-    this.removeFromParent();
+    if (other is GeorgeComponent) {
+      removeFromParent();
+      gameRef.bakedGoodsInventory++;
+
+      gameRef.yummy.start();
+      print('${gameRef.bakedGoodsInventory}');
+    }
   }
 }

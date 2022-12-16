@@ -27,7 +27,11 @@ class MyGeorgeGame extends FlameGame
 
   late AudioPool yummy;
   late AudioPool cheer;
-  late DialogBox dialogBox;
+  // late DialogBox dialogBox;
+  bool showDialog = true;
+
+  String dialogMessage = 'Hi. I am George. I have just'
+      ' moved to Happy Big Village';
 
   Future<void> onLoad() async {
     await super.onLoad();
@@ -47,12 +51,12 @@ class MyGeorgeGame extends FlameGame
     yummy = await AudioPool.create('audio/sfx/yummy.mp3', maxPlayers: 1);
     cheer = await AudioPool.create('audio/sfx/cheer_2.mp3', maxPlayers: 1);
 
-    dialogBox = DialogBox(
-        text: 'Hi. I am George. I have just'
-            ' moved to Happy Big Village'
-            ' I. Want. To. Make. Some. Frriiiiienndds)0',
-        game: this);
-    add(dialogBox);
+    // dialogBox = DialogBox(
+    //     text: 'Hi. I am George. I have just'
+    //         ' moved to Happy Big Village'
+    //         ' I. Want. To. Make. Some. Frriiiiienndds)0',
+    //     game: this);
+    // add(dialogBox);
 
     FlameAudio.bgm.initialize();
     FlameAudio.audioCache.load('cute.mp3');
