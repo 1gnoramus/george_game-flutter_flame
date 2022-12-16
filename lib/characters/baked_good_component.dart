@@ -2,6 +2,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
 import '../main.dart';
+import '../my_george_game.dart';
 
 class BakedGoodComponent extends SpriteComponent
     with

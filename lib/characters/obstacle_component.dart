@@ -1,8 +1,7 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:george_game_flame/characters/george_component.dart';
-
-import '../main.dart';
+import '../my_george_game.dart';
 
 class ObstacleComponent extends PositionComponent
     with CollisionCallbacks, GestureHitboxes {
