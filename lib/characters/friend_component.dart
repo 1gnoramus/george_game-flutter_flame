@@ -23,6 +23,10 @@ class FriendComponent extends PositionComponent
         game.friendNumber++;
         game.cheer.start();
 
+        if (game.maxFriends == game.friendNumber) {
+          game.sceneNumber++;
+          game.newScene();
+        }
         game.bakedGoodsInventory--;
         this.removeFromParent();
       } else {

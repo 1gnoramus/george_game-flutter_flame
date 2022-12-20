@@ -23,7 +23,6 @@ class DialogOverlay extends StatelessWidget {
               isRepeatingAnimation: false,
               onFinished: () {
                 game.showDialog = false;
-
                 print('dialog is over');
               },
             ),

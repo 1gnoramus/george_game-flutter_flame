@@ -14,7 +14,7 @@ class DialogBox extends TextBoxComponent {
             boxConfig: TextBoxConfig(
                 dismissDelay: 5.0,
                 maxWidth: game.size.x * .5,
-                timePerChar: .1)) {
+                timePerChar: .5)) {
     anchor = Anchor.bottomRight;
   }
 
@@ -28,7 +28,7 @@ class DialogBox extends TextBoxComponent {
   void update(double dt) {
     super.update(dt);
     if (finished) {
-      this.removeFromParent();
+      removeFromParent();
     }
   }
 }

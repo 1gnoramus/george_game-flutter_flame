@@ -23,7 +23,12 @@ class MyGeorgeGame extends FlameGame
   final double characterSize = 70;
   final double characterSpeed = 150;
   int friendNumber = 0;
+  int maxFriends = 0;
   int bakedGoodsInventory = 0;
+  int sceneNumber = 1;
+  late TiledComponent homeMap;
+
+  List<Component> componentList = [];
 
   late AudioPool yummy;
   late AudioPool cheer;
@@ -37,7 +42,7 @@ class MyGeorgeGame extends FlameGame
     await super.onLoad();
 
     // final homeMap = await TiledComponent.load('happy_map.tmx', Vector2.all(16));
-    final homeMap = await TiledComponent.load('map.tmx', Vector2.all(16));
+    homeMap = await TiledComponent.load('map.tmx', Vector2.all(16));
 
     add(homeMap);
 
@@ -50,13 +55,6 @@ class MyGeorgeGame extends FlameGame
 
     yummy = await AudioPool.create('audio/sfx/yummy.mp3', maxPlayers: 1);
     cheer = await AudioPool.create('audio/sfx/cheer_2.mp3', maxPlayers: 1);
-
-    // dialogBox = DialogBox(
-    //     text: 'Hi. I am George. I have just'
-    //         ' moved to Happy Big Village'
-    //         ' I. Want. To. Make. Some. Frriiiiienndds)0',
-    //     game: this);
-    // add(dialogBox);
 
     FlameAudio.bgm.initialize();
     FlameAudio.audioCache.load('cute.mp3');
@@ -84,5 +82,15 @@ class MyGeorgeGame extends FlameGame
     if (directions > 4) {
       directions = 0;
     }
+  }
+
+  void newScene() async {
+    remove(homeMap);
+    bakedGoodsInventory = 0;
+    friendNumber = 0;
+    maxFriends = 0;
+    FlameAudio.bgm.stop();
+    removeAll(componentList);
+    componentList = [];
   }
 }

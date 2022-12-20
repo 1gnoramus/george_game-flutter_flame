@@ -11,44 +11,45 @@ void addBakedGoods(TiledComponent homeMap, MyGeorgeGame game) async {
   for (var bakedGood in bakedGoodsGroup!.objects) {
     switch (bakedGood.type) {
       case 'Egg':
-        game.add(
-          BakedGoodComponent()
-            ..position = Vector2(bakedGood.x, bakedGood.y)
-            ..width = bakedGood.width
-            ..height = bakedGood.height
-            ..debugMode = true
-            ..sprite = await game.loadSprite('egg.png'),
-        );
+        var egg = BakedGoodComponent()
+          ..position = Vector2(bakedGood.x, bakedGood.y)
+          ..width = bakedGood.width
+          ..height = bakedGood.height
+          ..debugMode = true
+          ..sprite = await game.loadSprite('egg.png');
+        game.add(egg);
+        game.componentList.add(egg);
+
         break;
       case 'Fries':
-        game.add(
-          BakedGoodComponent()
-            ..position = Vector2(bakedGood.x, bakedGood.y)
-            ..width = bakedGood.width
-            ..height = bakedGood.height
-            ..debugMode = true
-            ..sprite = await game.loadSprite('fries.png'),
-        );
+        var fries = BakedGoodComponent()
+          ..position = Vector2(bakedGood.x, bakedGood.y)
+          ..width = bakedGood.width
+          ..height = bakedGood.height
+          ..debugMode = true
+          ..sprite = await game.loadSprite('fries.png');
+        game.add(fries);
+        game.componentList.add(fries);
         break;
       case 'Taco':
-        game.add(
-          BakedGoodComponent()
-            ..position = Vector2(bakedGood.x, bakedGood.y)
-            ..width = bakedGood.width
-            ..height = bakedGood.height
-            ..debugMode = true
-            ..sprite = await game.loadSprite('taco.png'),
-        );
+        var taco = BakedGoodComponent()
+          ..position = Vector2(bakedGood.x, bakedGood.y)
+          ..width = bakedGood.width
+          ..height = bakedGood.height
+          ..debugMode = true
+          ..sprite = await game.loadSprite('taco.png');
+        game.add(taco);
+        game.componentList.add(taco);
         break;
       case 'Bread':
-        game.add(
-          BakedGoodComponent()
-            ..position = Vector2(bakedGood.x, bakedGood.y)
-            ..width = bakedGood.width
-            ..height = bakedGood.height
-            ..debugMode = true
-            ..sprite = await game.loadSprite('bread.png'),
-        );
+        var bread = BakedGoodComponent()
+          ..position = Vector2(bakedGood.x, bakedGood.y)
+          ..width = bakedGood.width
+          ..height = bakedGood.height
+          ..debugMode = true
+          ..sprite = await game.loadSprite('bread.png');
+        game.add(bread);
+        game.componentList.add(bread);
         break;
     }
   }

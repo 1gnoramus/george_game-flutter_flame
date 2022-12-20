@@ -9,12 +9,12 @@ void loadObstacles(TiledComponent homeMap, MyGeorgeGame game) {
   final obstacleGroup = homeMap.tileMap.getLayer<ObjectGroup>('Obstacles');
 
   for (var obstacleBox in obstacleGroup!.objects) {
-    game.add(
-      ObstacleComponent(game: game)
-        ..position = Vector2(obstacleBox.x, obstacleBox.y)
-        ..width = obstacleBox.width
-        ..height = obstacleBox.height
-        ..debugMode = true,
-    );
+    var obstacle = ObstacleComponent(game: game)
+      ..position = Vector2(obstacleBox.x, obstacleBox.y)
+      ..width = obstacleBox.width
+      ..height = obstacleBox.height
+      ..debugMode = true;
+    game.add(obstacle);
+    game.componentList.add(obstacle);
   }
 }
