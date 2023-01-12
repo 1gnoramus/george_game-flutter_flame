@@ -6,6 +6,7 @@ import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/material.dart';
 import 'package:george_game_flame/dialog/dialog_box.dart';
 import 'package:george_game_flame/loaders/load_friends.dart';
+import 'package:george_game_flame/loaders/load_gems.dart';
 import 'package:george_game_flame/loaders/load_obstacles.dart';
 import 'package:flame/input.dart';
 import 'characters/george_component.dart';
@@ -25,6 +26,7 @@ class MyGeorgeGame extends FlameGame
   int friendNumber = 0;
   int maxFriends = 0;
   int bakedGoodsInventory = 0;
+  int gemInventory = 0;
   int sceneNumber = 1;
   late TiledComponent homeMap;
 
@@ -103,7 +105,7 @@ class MyGeorgeGame extends FlameGame
       print('2');
     } else if (sceneNumber == 3) {
       print('3');
-      mapFile = 'map.tmx';
+      mapFile = 'scene3.tmx';
     }
 
     homeMap = await TiledComponent.load(mapFile, Vector2.all(16));
@@ -114,6 +116,9 @@ class MyGeorgeGame extends FlameGame
     addBakedGoods(homeMap, this);
     loadFriends(homeMap, this);
     loadObstacles(homeMap, this);
+    if (sceneNumber == 3) {
+      loadGems(homeMap, this);
+    }
     add(george);
     camera.followComponent(george,
         worldBounds: Rect.fromLTRB(0, 0, mapWidth, mapHeight));
