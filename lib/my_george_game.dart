@@ -85,6 +85,7 @@ class MyGeorgeGame extends FlameGame
   }
 
   void newScene() async {
+    String mapFile = 'happy_map/tmx';
     remove(homeMap);
     bakedGoodsInventory = 0;
     friendNumber = 0;
@@ -92,5 +93,29 @@ class MyGeorgeGame extends FlameGame
     FlameAudio.bgm.stop();
     removeAll(componentList);
     componentList = [];
+    showDialog = false;
+    remove(george);
+    george = GeorgeComponent(game: this)
+      ..position = Vector2(300, 129)
+      ..debugMode = true
+      ..size = Vector2.all(characterSize);
+    if (sceneNumber == 2) {
+      print('2');
+    } else if (sceneNumber == 3) {
+      print('3');
+      mapFile = 'map.tmx';
+    }
+
+    homeMap = await TiledComponent.load(mapFile, Vector2.all(16));
+    add(homeMap);
+
+    mapWidth = homeMap.tileMap.map.width * 16;
+    mapHeight = homeMap.tileMap.map.height * 16;
+    addBakedGoods(homeMap, this);
+    loadFriends(homeMap, this);
+    loadObstacles(homeMap, this);
+    add(george);
+    camera.followComponent(george,
+        worldBounds: Rect.fromLTRB(0, 0, mapWidth, mapHeight));
   }
 }

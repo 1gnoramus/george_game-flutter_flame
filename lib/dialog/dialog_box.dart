@@ -28,6 +28,7 @@ class DialogBox extends TextBoxComponent {
   void update(double dt) {
     super.update(dt);
     if (finished) {
+      print('object');
       removeFromParent();
     }
   }
